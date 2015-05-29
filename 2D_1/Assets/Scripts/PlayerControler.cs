@@ -3,22 +3,13 @@ using System.Collections;
 
 public class PlayerControler : MonoBehaviour
 {
-	public float maxSpeedX = 10.0f;
-	public float maxSpeedY = 10.0f;
+	public float maxSpeedX = 0.1f;
+	public float maxSpeedY = 0.1f;
 
-	public Bounds bg;
-	public float  my_X_min;
-	public float  my_X_max;
-
-	public float  bg_X_min;
-	public float  bg_X_max;
+//	public GameObject asteroid;
 
 
-	public GameObject asteroid;
-
-//	public 
 	float moveX;
-	//public 
 	float moveY;
 
 	public int health = 100;
@@ -26,17 +17,18 @@ public class PlayerControler : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+
 		Start1 ();
 	}
 
 
 	void Start1 ()
 	{
-		for (int y = 0; y < 5; y++) {
-			for (int x = 0; x < 5; x++) {
-				Instantiate (asteroid, new Vector3 (x, y / 2 + 5, 0), Quaternion.identity);
-			}
-		}
+//		for (int y = 0; y < 5; y++) {
+//			for (int x = 0; x < 5; x++) {
+//				Instantiate (asteroid, new Vector3 (x, y / 2 + 5, 0), Quaternion.identity);
+//			}
+//		}
 	}
 
 
@@ -50,40 +42,25 @@ public class PlayerControler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//Vector3 newPos = new Vector3 (moveX, moveY, transform.position.z);
-		//transform.position = newPos;
-
-		//Bounds 
-		bg = GameObject.Find ("background").GetComponent<SpriteRenderer> ().sprite.bounds;
+		Bounds bg = GameObject.Find ("background").GetComponent<SpriteRenderer> ().sprite.bounds;
 		Vector3 bgPos = GameObject.Find ("background").transform.position; 
-		//Bounds 
-		Vector3 myPos = transform.position; 
 		Bounds my = GetComponent<SpriteRenderer> ().sprite.bounds; 
+		Vector3 myPos = transform.position; 
 
-
-		my_X_min = my.min.x + myPos.x;
-		my_X_max = my.max.x + myPos.x;
-
-		bg_X_min = bg.min.x + bgPos.x;
-		bg_X_max = bg.max.x + bgPos.x;
-
-		if ((my_X_min <= bg_X_min) && moveX < 0)
-		//if ((my.min.x + myPos.x <= bg.min.x + bgPos.x) || (my.max.x + myPos.x >= bg.max.x + bgPos.x))
+		if (((my.min.x + myPos.x) <= (bg.min.x + bgPos.x)) && moveX < 0)
 			moveX = 0.0f;
 
-		if ((my_X_max >= bg_X_max) && moveX > 0)
-			//if ((my.min.x + myPos.x <= bg.min.x + bgPos.x) || (my.max.x + myPos.x >= bg.max.x + bgPos.x))
+		if (((my.max.x + myPos.x) >= (bg.max.x + bgPos.x)) && moveX > 0)
 			moveX = 0.0f;
 
+		if (((my.min.y + myPos.y) <= (bg.min.y + bgPos.y)) && moveY < 0)
+			moveY = 0.0f;
 
+		if (((my.max.y + myPos.y) >= (bg.max.y + bgPos.y)) && moveY > 0)
+			moveY = 0.0f;
 
-		//		if (my.min.y >= bg.min.y || my.min.y <= bg.min.y)
-//			moveY = 0.0f;
-
-
-
-
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 (moveX * maxSpeedX, moveY * maxSpeedY);
+		myPos += new Vector3 (moveX * maxSpeedX, moveY * maxSpeedY, myPos.z);
+		transform.position = myPos;
 
 		if (Input.GetKeyDown (KeyCode.R))
 		  // Application.LoadLevel(Application.loadedLevel());
@@ -123,7 +100,7 @@ public class PlayerControler : MonoBehaviour
 
 	void OnGUI ()
 	{
-		GUI.Box (new Rect (0, 0, 100, 100), "health: " + health);
+		//GUI.Box (new Rect (0, 0, 100, 100), "health: " + health);
 	}
 
 } // end class
