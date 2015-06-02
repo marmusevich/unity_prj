@@ -1,24 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerScript : MonoBehaviour 
+public class PlayerScript : MonoBehaviour
 {
     public float playerVelosity;
     public float boundary;
     private Vector3 playerPosition;
 
-	// Use this for initialization
-	void Start () 
+    private int playerLives;
+    private int playerPoints;
+
+    public AudioClip pointsSound;
+    public AudioClip livesSound;
+
+    public GUIStyle styleGUI;
+    public GUISkin skinGUI;
+
+
+
+    // Use this for initialization
+    void Start()
     {
+        playerLives = 3;
         playerPosition = gameObject.transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         playerPosition.x += Input.GetAxis("Horizontal") * playerVelosity;
 
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if (playerLives <=0)
         {
             Application.Quit();
         }
@@ -31,7 +48,38 @@ public class PlayerScript : MonoBehaviour
         {
             playerPosition.x = boundary;
         }
-        
+
         gameObject.transform.position = playerPosition;
-	}
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(5.0f, 3.0f, 200.0f, 200.0f), "Live's: " + playerLives + " Score: " + playerPoints, styleGUI);
+
+       GUI.skin = skinGUI;
+
+       if (GUI.Button(new Rect(500.0f, 3.0f, 200.0f, 20.0f), "Pause"))
+       {
+           Debug.Log("Pause press");
+       }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
+
+
+    public void TakeLives()
+    {
+        playerLives--;
+        GetComponent<AudioSource>().PlayOneShot(livesSound);
+    }
+
+
+    public void AddPoints(int points)
+    {
+        playerPoints += points;
+        GetComponent<AudioSource>().PlayOneShot(pointsSound);
+    }
 }
