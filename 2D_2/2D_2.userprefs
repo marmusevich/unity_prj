@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\2D_2\Assets\Scripts\BallScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BallScript.cs">
     <Files>
-      <File FileName="..\2D_2\Assets\Scripts\BallScript.cs" Line="22" Column="49" />
+      <File FileName="Assets\Scripts\BallScript.cs" Line="22" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
