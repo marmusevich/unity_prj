@@ -39,12 +39,3 @@ public class BlockScript : MonoBehaviour
     }
 }
 
-//создание из префаба
-//	public GameObject asteroid;
-
-
-//		for (int y = 0; y < 5; y++) {
-//			for (int x = 0; x < 5; x++) {
-//				Instantiate (asteroid, new Vector3 (x, y / 2 + 5, 0), Quaternion.identity);
-//			}
-//		}

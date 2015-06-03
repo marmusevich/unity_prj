@@ -14,8 +14,7 @@ public class PlayerScript : MonoBehaviour
     public AudioClip livesSound;
 
     public GUIStyle styleGUI;
-    public GUISkin skinGUI;
-
+    
 
 
     // Use this for initialization
@@ -55,13 +54,6 @@ public class PlayerScript : MonoBehaviour
     void OnGUI()
     {
         GUI.Label(new Rect(5.0f, 3.0f, 200.0f, 200.0f), "Live's: " + playerLives + " Score: " + playerPoints, styleGUI);
-
-       GUI.skin = skinGUI;
-
-       if (GUI.Button(new Rect(500.0f, 3.0f, 200.0f, 20.0f), "Pause"))
-       {
-           Debug.Log("Pause press");
-       }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
