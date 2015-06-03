@@ -4,3 +4,5 @@ obj
 /2D_2/bin
 Library
 bin
+Library
+*.suo
