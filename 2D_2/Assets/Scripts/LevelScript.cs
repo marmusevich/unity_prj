@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -12,7 +12,7 @@ public class LevelScript : MonoBehaviour
     #region tipes, helper class
 
     //описание одного блока
-    [XmlType("Block")] 
+    [XmlType("Block")]
     public class OneBlock
     {
         [XmlElement("Name")]
@@ -39,7 +39,7 @@ public class LevelScript : MonoBehaviour
     public class OneLevel
     {
         [XmlElement("LevelName")]
-        public string levelName;
+        public string levelName = "default level";
 
         [XmlArray("Bloks")]
         [XmlArrayItem("OneBlock")]
@@ -91,7 +91,17 @@ public class LevelScript : MonoBehaviour
     #region vars
 
     public Levels allLevels = new Levels();
-    
+
+    public GameObject prefabBlueBlock;
+    public GameObject prefabGrinBlock;
+    public GameObject prefabRedBlock;
+    public GameObject prefabYellovBlock;
+
+    private Dictionary<string, GameObject> allPrefab = new Dictionary<string, GameObject>();
+
+
+
+
     #endregion
     //------------------------------------------------------------------------------------
 
@@ -121,10 +131,9 @@ public class LevelScript : MonoBehaviour
     private OneLevel GetLevelFromScrin()
     {
         OneLevel lev = new OneLevel();
-        GameObject[] allbloks = GameObject.FindGameObjectsWithTag("Bloks");
-        for (int i = 0; i < allbloks.Length; i++)
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Bloks"))
         {
-            lev.bloks.Add(new OneBlock(allbloks[i].name, allbloks[i].transform.position));
+            lev.bloks.Add(new OneBlock(obj.name, obj.transform.position));
         }
         return lev;
     }
@@ -133,24 +142,61 @@ public class LevelScript : MonoBehaviour
     {
         foreach (OneBlock block in lev.bloks)
         {  // для всех предметов в комнате
-            Instantiate(Resources.Load(block.name), block.position, Quaternion.identity);
-            //block.inst = Instantiate(Resources.Load(block.name), block.position, Quaternion.identity) as GameObject;
-            // овеществляем их
-            //felt.Estate(); // и задаём дополнительные параметры
+            GameObject obj = Instantiate(allPrefab[block.name], block.position, Quaternion.identity) as GameObject;
         }
-
-    }
-
-    void Generate()
-    {
     }
 
 
-    ////------------------------------------------------------------------------------------
-    //#region 
 
-    //#endregion
-    ////------------------------------------------------------------------------------------
+
+    // очистить текущий уровень
+    //void Update()
+    //{
+
+    //}
+
+    // сохранить в хранилища скриптов по номеру
+    //void Update()
+    //{
+
+    //}
+
+    //посторить из хранилища скриптов по номеру
+    //void Update()
+    //{
+
+    //}
+
+    // перезапуск = очистить текущий уровень + посторить из хранилища скриптов по номеру
+    //void Update()
+    //{
+
+    //}
+
+    // для редактора добавить в конец уровень
+    //void Update()
+    //{
+
+    //}
+
+    // дать обще количество уровней
+    //void Update()
+    //{
+
+    //}
+
+
+
+
+    // как состояния игры и игрока
+    //  - сохранить текущее состояние
+    //  - востоновить текущее состояние
+    // для состояния свой серилизатор
+    // хрень для простоты хранить последний пройденый уровень (номер), жизни, очки 
+    //void Update()
+    //{
+
+    //}
 
 
 
@@ -159,6 +205,11 @@ public class LevelScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //иницилизировать словарь префабами
+        allPrefab.Add(prefabBlueBlock.name, prefabBlueBlock);
+        allPrefab.Add(prefabGrinBlock.name, prefabGrinBlock);
+        allPrefab.Add(prefabRedBlock.name, prefabRedBlock);
+        allPrefab.Add(prefabYellovBlock.name, prefabYellovBlock);
 
     }
 
@@ -168,17 +219,6 @@ public class LevelScript : MonoBehaviour
 
     }
 }
-
-
-//создание из префаба
-//	public GameObject asteroid;
-
-
-//		for (int y = 0; y < 5; y++) {
-//			for (int x = 0; x < 5; x++) {
-//				Instantiate (asteroid, new Vector3 (x, y / 2 + 5, 0), Quaternion.identity);
-//			}
-//		}
 
 
 //public GUISkin skinGUI;
@@ -193,3 +233,9 @@ public class LevelScript : MonoBehaviour
 //    //    Debug.Log("Pause press");
 //    //}
 //}
+
+////------------------------------------------------------------------------------------
+//#region 
+
+//#endregion
+////------------------------------------------------------------------------------------

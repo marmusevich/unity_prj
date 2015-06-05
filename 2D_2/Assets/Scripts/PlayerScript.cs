@@ -15,8 +15,6 @@ public class PlayerScript : MonoBehaviour
 	public AudioClip livesSound;
 
 	public GUIStyle styleGUI;
-    
-
 
 	// Use this for initialization
 	void Start ()
@@ -58,17 +56,29 @@ public class PlayerScript : MonoBehaviour
 
 	}
 
-
 	public void TakeLives ()
 	{
 		playerLives--;
 		GetComponent<AudioSource> ().PlayOneShot (livesSound);
 	}
 
-
 	public void AddPoints (int points)
 	{
 		playerPoints += points;
 		GetComponent<AudioSource> ().PlayOneShot (pointsSound);
 	}
+
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("playerLives", playerLives);
+        PlayerPrefs.SetInt("playerPoints", playerPoints); 
+    }
+
+    public void Load()
+    {
+        playerLives = PlayerPrefs.GetInt("playerLives");
+        playerPoints = PlayerPrefs.GetInt("playerPoints"); 
+    }
 }
+
