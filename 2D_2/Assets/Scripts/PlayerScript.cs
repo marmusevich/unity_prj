@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 
 public class PlayerScript : MonoBehaviour
 {
+
 	public float playerVelosity;
 	public float boundary;
 	private Vector3 playerPosition;
@@ -15,6 +17,9 @@ public class PlayerScript : MonoBehaviour
 	public AudioClip livesSound;
 
 	public GUIStyle styleGUI;
+
+    public GameObject ballObject;
+
 
 	// Use this for initialization
 	void Start ()

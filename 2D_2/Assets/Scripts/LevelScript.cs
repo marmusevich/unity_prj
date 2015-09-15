@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System;
 using System.IO;
+using UnityEngine.EventSystems;
+
 
 public class LevelScript : MonoBehaviour
 {
@@ -98,10 +100,7 @@ public class LevelScript : MonoBehaviour
     public GameObject prefabYellovBlock;
 
     private Dictionary<string, GameObject> allPrefab = new Dictionary<string, GameObject>();
-
-
-
-
+    
     #endregion
     //------------------------------------------------------------------------------------
 

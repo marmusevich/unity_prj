@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BallScript : MonoBehaviour
 {
-	private bool ballIsActive;
+    private bool ballIsActive;
 	private Vector3 ballPosition;
 	private float ballStartPositionY;
 	public Vector2 ballInitialForce = new Vector2 (100.0f, 300.0f);
