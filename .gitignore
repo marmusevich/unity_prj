@@ -1,8 +1,12 @@
 obj
-/2D_2/*.suo
-/2D_1/Library
-/2D_2/bin
-Library
 bin
 Library
 *.suo
+/2D_1/*.suo
+/2D_1/bin
+/2D_1/obj
+/2D_1/Library
+/2D_2/*.suo
+/2D_2/bin
+/2D_2/obj
+/2D_2/Library
