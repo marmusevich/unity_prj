@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="0">Base1<EffectOn>der1</EffectOn></Key>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="0">Base2<EffectOn>der2</EffectOn></Key>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="100">der1<Depend>Base1</Depend><EffectOn>der2</EffectOn></Key>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="150">der2<Depend>der1</Depend><Depend>Base2</Depend><EffectOn>der3</EffectOn><EffectOn>der4</EffectOn></Key>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="170">der3<Depend>der2</Depend></Key>
+	<Key IsCanStudied="False" IsStudied="False" TrainingPrice="180">der4<Depend>der2</Depend></Key>
+</root>
