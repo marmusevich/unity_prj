@@ -56,11 +56,9 @@
      <Compile Include="Assets\old\2d_2_Assets\Scripts\Editor.cs" />
      <Compile Include="Assets\old\2d_2_Assets\Scripts\LevelScript.cs" />
      <Compile Include="Assets\old\2d_2_Assets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\old\TestTreeDevelopment\Program.cs" />
      <Compile Include="Assets\old\TestTreeDevelopment\TreeDevelopment.cs" />
      <None Include="Assets\old\TestTreeDevelopment\TreeDevelopment.xml" />
      <None Include="Assets\old\2d_2_Assets\SavedData.xml" />
-     <None Include="Assets\old\TestTreeDevelopment\TreeDevelopment2.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
