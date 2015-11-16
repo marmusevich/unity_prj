@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class buttonTest : MonoBehaviour {
+public class buttonTest : MonoBehaviour
+{
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+		//for 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 
-	public void OnButtonClic()
+	public void OnButtonClic ()
 	{
 		Debug.Log ("OnButtonClic");
 	}
