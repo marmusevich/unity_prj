@@ -1,12 +1,1 @@
-﻿<Properties GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scenes\menu_res\buttonTest.cs">
-    <Files>
-      <File FileName="Assets\Scenes\menu_res\buttonTest.cs" Line="14" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-</Properties>
+﻿<Properties GitUserInfo="UsingGIT" />
