@@ -7,7 +7,7 @@ public class buttonTest : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//for 
+
 	}
 	
 	// Update is called once per frame
