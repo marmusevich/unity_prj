@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\ReadSceneNames.cs" />
      <Compile Include="Assets\Scenes\menu_res\buttonTest.cs" />
+     <Compile Include="Assets\Shared\Scripts\ReadSceneNames.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\MyCamera2DFollow.cs" />
