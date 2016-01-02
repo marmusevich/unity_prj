@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
 
 public class semple_to_use : MonoBehaviour {
@@ -13,3 +14,4 @@ public class semple_to_use : MonoBehaviour {
 	
 	}
 }
+*/

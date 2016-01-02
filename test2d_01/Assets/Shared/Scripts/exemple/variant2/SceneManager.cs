@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿/*
+using System.IO;
 using FullInspector;
 using UnityEditor;
 using UnityEngine;
@@ -113,3 +114,4 @@ public class SceneManager
 		}
 	}
 }
+*/

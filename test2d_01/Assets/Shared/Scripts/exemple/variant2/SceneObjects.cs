@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*
+
+using System;
 using System.Linq;
 using FullInspector;
 using System.Collections.Generic;
@@ -77,3 +79,5 @@ public class SceneCollection : BaseScriptableObject<JsonNetSerializer>
 	public SceneHolder MyScenes2;
 	
 }
+
+*/

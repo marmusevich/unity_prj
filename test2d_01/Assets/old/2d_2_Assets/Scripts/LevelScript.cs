@@ -141,7 +141,8 @@ public class LevelScript : MonoBehaviour
     {
         foreach (OneBlock block in lev.bloks)
         {  // для всех предметов в комнате
-            GameObject obj = Instantiate(allPrefab[block.name], block.position, Quaternion.identity) as GameObject;
+            //GameObject obj = Instantiate(allPrefab[block.name], block.position, Quaternion.identity) as GameObject;
+			Instantiate(allPrefab[block.name], block.position, Quaternion.identity);
         }
     }
 

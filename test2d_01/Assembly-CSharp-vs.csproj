@@ -46,13 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\menu_res\buttonTest.cs" />
-     <Compile Include="Assets\Shared\Scripts\Game.cs" />
-     <Compile Include="Assets\Shared\Scripts\ReadSceneNames.cs" />
-     <Compile Include="Assets\Shared\Scripts\variant2\GameEvents.cs" />
-     <Compile Include="Assets\Shared\Scripts\variant2\SceneManager.cs" />
-     <Compile Include="Assets\Shared\Scripts\variant2\SceneObjects.cs" />
-     <Compile Include="Assets\Shared\Scripts\variant2\semple_to_use.cs" />
+     <Compile Include="Assets\Scenes\menu_res\CircledMove.cs" />
+     <Compile Include="Assets\Scenes\menu_res\MainMenuBehaviour.cs" />
+     <Compile Include="Assets\Scenes\menu_res\MenuInfo.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\Game.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\ReadSceneNames.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\variant2\GameEvents.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\variant2\SceneManager.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\variant2\SceneObjects.cs" />
+     <Compile Include="Assets\Shared\Scripts\exemple\variant2\semple_to_use.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\old\2d_1_Assets\Scripts\MyCamera2DFollow.cs" />
