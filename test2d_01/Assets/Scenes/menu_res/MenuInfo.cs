@@ -57,7 +57,7 @@ public class MenuInfo : MonoBehaviour
 	public  static List<MenuOneItem> GetMenuItems ()
 	{
 		List<MenuOneItem> tmp = new List<MenuOneItem> ();
-		tmp.Add (new MenuOneItem ("Game - 1", "game1"));
+		tmp.Add (new MenuOneItem ("Lode Runner", "lode_runner"));
 
 		for (int i = 2; i<10; i++)
 			tmp.Add (new MenuOneItem (string.Format ("_scenes_{0}", i), null));
