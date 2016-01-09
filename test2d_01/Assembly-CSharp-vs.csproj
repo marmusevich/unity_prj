@@ -46,6 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scenes\lode_runner_res\scripts\ActorBaseBehaviour.cs" />
+     <Compile Include="Assets\Scenes\lode_runner_res\scripts\GamePauseMenu.cs" />
+     <Compile Include="Assets\Scenes\lode_runner_res\scripts\LevelMenedger.cs" />
      <Compile Include="Assets\Scenes\menu_res\CircledMove.cs" />
      <Compile Include="Assets\Scenes\menu_res\MainMenuBehaviour.cs" />
      <Compile Include="Assets\Scenes\menu_res\MenuInfo.cs" />
