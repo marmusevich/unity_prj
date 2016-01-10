@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GamePauseMenu : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class GamePauseMenu : MonoBehaviour
 		
 			Debug.Log( "KeyUp = Escape" );
 
-			Application.LoadLevel( "menu" );
+			SceneManager.LoadScene( "menu" );
+
 		}
 	}
 }
