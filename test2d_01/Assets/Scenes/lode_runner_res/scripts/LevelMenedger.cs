@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+
+
+
+
 public class LevelMenedger : MonoBehaviour
 {
     // размер по умолчанию
@@ -10,24 +15,23 @@ public class LevelMenedger : MonoBehaviour
 
     public enum MapObjectType
     {
-        None = 0,
         // пустое место, ничего
-        Brick,
+        None = 0,
         // кирпичи
-        Stairs,
+        Brick,
         // лестница
-        Ferriade,
+        Stairs,
         // переправа, веревка
-        Treasure,
+        Ferriade,
         // награда, золото
-        Finish,
+        Treasure,
         // место перехода на следующий уровень
-        Hero,
+        Finish,
         // место старта героя
+        Hero,
+        // место старта врага
         Enemy
-        // место старта врага}
-    ;
-
+    }
 
     // описывает один уровень
     public class OneLevel
