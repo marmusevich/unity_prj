@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scenes\arcanoid\scripts\Editor.cs" />
      <Compile Include="Assets\Scenes\arcanoid\scripts\LevelScript.cs" />
      <Compile Include="Assets\Scenes\arcanoid\scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scenes\habr_test_1\scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scenes\habr_test_1\scripts\CaracterControllerScript.cs" />
      <Compile Include="Assets\Scenes\habr_test_2\characterController.cs" />
      <Compile Include="Assets\Scenes\lode_runner_res\scripts\ActorBaseBehaviour.cs" />

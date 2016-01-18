@@ -2,29 +2,33 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GamePauseMenu : MonoBehaviour
+namespace LodeRunner
 {
-    // Use this for initialization
-    void Start()
-    {
-	
-    }
-	
-    // Update is called once per frame
-    void Update()
-    {
-	
-    }
 
-    void FixedUpdate()
+    public class GamePauseMenu : MonoBehaviour
     {
-        if( Input.GetKeyUp( KeyCode.Escape ) )
+        // Use this for initialization
+        void Start()
         {
-		
-            Debug.Log( "KeyUp = Escape" );
 
-            SceneManager.LoadScene( "menu" );
+        }
 
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void FixedUpdate()
+        {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+
+                Debug.Log("KeyUp = Escape");
+
+                SceneManager.LoadScene("menu");
+
+            }
         }
     }
 }

@@ -67,11 +67,14 @@
     <Compile Include="Assets\Scenes\arcanoid\scripts\Editor.cs" />
     <Compile Include="Assets\Scenes\arcanoid\scripts\LevelScript.cs" />
     <Compile Include="Assets\Scenes\arcanoid\scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scenes\habr_test_1\scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scenes\habr_test_1\scripts\CaracterControllerScript.cs" />
     <Compile Include="Assets\Scenes\habr_test_2\characterController.cs" />
     <Compile Include="Assets\Scenes\lode_runner_res\scripts\ActorBaseBehaviour.cs" />
+    <Compile Include="Assets\Scenes\lode_runner_res\scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scenes\lode_runner_res\scripts\GamePauseMenu.cs" />
     <Compile Include="Assets\Scenes\lode_runner_res\scripts\LevelMenedger.cs" />
+    <Compile Include="Assets\Scenes\lode_runner_res\scripts\PlayerScript.cs" />
     <Compile Include="Assets\Scenes\menu_res\CircledMove.cs" />
     <Compile Include="Assets\Scenes\menu_res\MainMenuBehaviour.cs" />
     <Compile Include="Assets\Scenes\menu_res\MenuInfo.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="Assets\Scenes\space_attac\scripts\MyCamera2DFollow.cs" />
     <Compile Include="Assets\Scenes\space_attac\scripts\PlayerControler.cs" />
     <Compile Include="Assets\Scenes\tree_development\treedevelopment.cs" />
+    <Compile Include="Assets\Shared\Scripts\MyUtilsFunction.cs" />
     <Compile Include="Assets\Shared\Scripts\exemple\Game.cs" />
     <Compile Include="Assets\Shared\Scripts\exemple\ReadSceneNames.cs" />
     <Compile Include="Assets\Shared\Scripts\exemple\variant2\GameEvents.cs" />
