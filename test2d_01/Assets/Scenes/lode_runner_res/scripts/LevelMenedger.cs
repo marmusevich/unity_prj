@@ -6,10 +6,10 @@ namespace LodeRunner
 {
     public class LevelMenedger : MonoBehaviour
     {
-        // отладочный уровень
+        /// отладочный уровень
         void CreateDebagLevel()
         {
-            if (Levels == null)
+            if(Levels == null)
             {
                 Levels = new List<OneLevel>();
             }
@@ -18,13 +18,13 @@ namespace LodeRunner
             Levels.Add(lvl);
 
             // по центру горизонталь веревка
-            for (int i = 0; i < COUNT_BLOCK_ON_X; i++)
+            for(int i = 0; i < COUNT_BLOCK_ON_X; i++)
             {
                 lvl.mMap[i, COUNT_BLOCK_ON_Y / 2] = MapObjectType.Ferriade;
             }
 
             //над веревкай кираичи
-            for (int i = 0; i < COUNT_BLOCK_ON_X; i++)
+            for(int i = 0; i < COUNT_BLOCK_ON_X; i++)
             {
                 lvl.mMap[i, COUNT_BLOCK_ON_Y * 3 / 4] = MapObjectType.Brick;
                 lvl.mMap[i, COUNT_BLOCK_ON_Y * 1 / 4 - 1] = MapObjectType.Brick;
@@ -32,20 +32,20 @@ namespace LodeRunner
 
 
             // по центру горизонталь лестница
-            for (int i = 0; i < COUNT_BLOCK_ON_Y; i++)
+            for(int i = 0; i < COUNT_BLOCK_ON_Y; i++)
             {
                 lvl.mMap[COUNT_BLOCK_ON_X / 2, i] = MapObjectType.Stairs;
             }
 
             //воокруг кирпичи
-            for (int i = 0; i < COUNT_BLOCK_ON_X; i++)
+            for(int i = 0; i < COUNT_BLOCK_ON_X; i++)
             {
                 // без верха
                 //lvl.mMap[i, 0] = MapObjectType.Brick;
                 lvl.mMap[i, COUNT_BLOCK_ON_Y - 1] = MapObjectType.Brick;
             }
 
-            for (int i = 0; i < COUNT_BLOCK_ON_Y; i++)
+            for(int i = 0; i < COUNT_BLOCK_ON_Y; i++)
             {
                 lvl.mMap[0, i] = MapObjectType.Brick;
                 lvl.mMap[COUNT_BLOCK_ON_X - 1, i] = MapObjectType.Brick;
@@ -89,6 +89,7 @@ namespace LodeRunner
         public class OneLevel
         {
             public MapObjectType[,] mMap;
+
             public OneLevel()
             {
                 mMap = new MapObjectType[COUNT_BLOCK_ON_X, COUNT_BLOCK_ON_Y];
@@ -115,29 +116,30 @@ namespace LodeRunner
         public Vector2 defaultSize;
         public Vector2 topLeft, bottomRight;
 
+        private Vector2 m_ofset, m_scale;
 
         //проверки всякии добавить надо
-        private void DraweMap(OneLevel lvl)
+        private void DrawMap(OneLevel lvl)
         {
             Camera camera = GetComponent<Camera>();
 
             //Vector2 topLeft, bottomRight;
             MyUtilsFunction.ReturnScreenSizeInCamera(camera, out topLeft, out bottomRight);
 
-            Vector2 ofset = new Vector2(Mathf.Abs(topLeft.x - bottomRight.x) / COUNT_BLOCK_ON_X, Mathf.Abs(topLeft.y - bottomRight.y) / COUNT_BLOCK_ON_Y);
+            m_ofset = new Vector2(Mathf.Abs(topLeft.x - bottomRight.x) / COUNT_BLOCK_ON_X, Mathf.Abs(topLeft.y - bottomRight.y) / COUNT_BLOCK_ON_Y);
             //Vector2
             defaultSize = MyUtilsFunction.GetGameObjectSize(PrefabBrick);
             //Vector2 defaultSize = new Vector2(0.64f, 0.64f);
-            Vector2 scale = new Vector2(ofset.x / defaultSize.x, ofset.y / defaultSize.y);
+            m_scale = new Vector2(m_ofset.x / defaultSize.x, m_ofset.y / defaultSize.y);
 
             GameObject block = null;
 
-            for (int j = 0; j < COUNT_BLOCK_ON_Y; j++)
+            for(int j = 0; j < COUNT_BLOCK_ON_Y; j++)
             {
-                for (int i = 0; i < COUNT_BLOCK_ON_X; i++)
+                for(int i = 0; i < COUNT_BLOCK_ON_X; i++)
                 {
                     block = null;
-                    switch (lvl.mMap[i, j])
+                    switch( lvl.mMap[i, j] )
                     {
                         case MapObjectType.Brick:
                             block = PrefabBrick;
@@ -154,10 +156,10 @@ namespace LodeRunner
                         default:
                             continue;
                     }
-                    GameObject obj = Instantiate(block, new Vector2(topLeft.x + ofset.x / 2 + ofset.x * i, topLeft.y - ofset.y / 2 - ofset.y * j), Quaternion.identity) as GameObject;
+                    GameObject obj = Instantiate(block, new Vector2(topLeft.x + m_ofset.x / 2 + m_ofset.x * i, topLeft.y - m_ofset.y / 2 - m_ofset.y * j), Quaternion.identity) as GameObject;
                     obj.name = lvl.mMap[i, j].ToString() + i + "_" + j;
                     //obj.transform.localScale = new Vector3(obj.transform.localScale.x * scale.x, obj.transform.localScale.y * scale.y, obj.transform.localScale.z);
-                    obj.transform.localScale = new Vector3(scale.x, scale.y, obj.transform.localScale.z);
+                    obj.transform.localScale = new Vector3(m_scale.x, m_scale.y, obj.transform.localScale.z);
                 }
             }
         }
@@ -171,7 +173,7 @@ namespace LodeRunner
             // тест
             CreateDebagLevel();
             OneLevel lvl = Levels[0];
-            DraweMap(lvl);
+            DrawMap(lvl);
             // тест
         }
 
