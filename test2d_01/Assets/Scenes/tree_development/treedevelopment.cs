@@ -10,9 +10,12 @@ using System.Xml.Serialization;
 
 // добавить проверки
 
+namespace TreeDevolopment
+{
 
 
-/* собственно классс
+
+    /* собственно классс
 namespace TestTreeDevelopment
 {
     public class TreeDevelopment
@@ -190,7 +193,7 @@ namespace TestTreeDevelopment
 */
 
 
-/* -- test for this class
+    /* -- test for this class
 namespace TestTreeDevelopment
 {
 	class Program
@@ -245,3 +248,4 @@ namespace TestTreeDevelopment
 	}
 }
 */
+}

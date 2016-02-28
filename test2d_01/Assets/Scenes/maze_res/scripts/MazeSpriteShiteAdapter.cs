@@ -41,7 +41,6 @@ namespace Maze
 
             int tmp = convertArr[numer];
             //  Debug.Log(string.Format("{0} -> {1} = {2}", numer, tmp, Sprites[tmp].name));
-
             GetComponent<SpriteRenderer>().sprite = Sprites[tmp];
         }
 

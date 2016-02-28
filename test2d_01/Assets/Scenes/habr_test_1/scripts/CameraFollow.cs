@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraFollow : MonoBehaviour
+namespace HabrTest1
 {
 
-    public Transform target;
-
-
-    private void Start()
+    public class CameraFollow : MonoBehaviour
     {
-    }
+
+        public Transform target;
 
 
-    private void Update()
-    {
-        Vector3 NewCameraPos = new Vector3(target.position.x, target.position.y, transform.position.z);
-        transform.position = NewCameraPos;
+        private void Start()
+        {
+        }
+
+
+        private void Update()
+        {
+            Vector3 NewCameraPos = new Vector3(target.position.x, target.position.y, transform.position.z);
+            transform.position = NewCameraPos;
+        }
     }
 }

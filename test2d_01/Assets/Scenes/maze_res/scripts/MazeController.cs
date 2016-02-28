@@ -5,25 +5,12 @@ using System.Collections.Generic;
 
 namespace Maze
 {
-
-    using MazeType = UInt16;
-    using MazePointListType = List<MazePoint>;
-
-
     /// <summary>
     /// координата точьки в лабиринте
     /// </summary>
-    public struct MazePoint
-    {
-        public MazePoint(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
-        }
-
-        public int x;
-        public int y;
-    }
+    using MazePoint = IntVector2D;
+    using MazePointListType = List<IntVector2D>;
+    using MazeType = UInt16;
 
     public class MazeController : MonoBehaviour
     {
@@ -44,6 +31,21 @@ namespace Maze
         /// </summary>
         public MazePointListType ListSpace;
 
+        /// <summary>
+        /// процент извилистости
+        /// </summary>
+        public float WindingPrecent = 0.5f;
+
+        /// <summary>
+        /// Размер лабиринта
+        /// </summary>
+        public uint xMazeSize = 20;
+        public uint yMazeSize = 20;
+
+        //для преобразователя координат
+        Vector2 m_ofset;
+        Vector2 topLeft;
+
 
         // хранит лабиринт, byte - 8 бит без знака
         private  MazeType[,] mMaze = null;
@@ -53,6 +55,30 @@ namespace Maze
         #endregion
 
         #region функции
+
+        /// <summary>
+        /// Настройка преоброзователя координат
+        /// </summary>
+        /// <param name="xSize">размер по X</param>
+        /// <param name="ySize">размер по Y</param>
+        void CalculateScreenParametr(int xSize, int ySize)
+        {
+            MazeSpriteShiteAdapter mssa = PrefabWall.GetComponent<MazeSpriteShiteAdapter>();
+            m_ofset = new Vector2(mssa.SizePerUnit, mssa.SizePerUnit);
+            topLeft = new Vector2(-mssa.SizePerUnit * xSize / 2, mssa.SizePerUnit * ySize / 2);
+        }
+
+        /// <summary>
+        /// Преоброзовать координаты матрицы в экранные
+        /// </summary>
+        /// <returns>Экранные коордионаты</returns>
+        /// <param name="x">The x coordinate in maze.</param>
+        /// <param name="y">The y coordinate in maze.</param>
+        public Vector2 ConvertMazeCoordToScreen(int x, int y)
+        {
+            return new Vector2(topLeft.x + m_ofset.x / 2 + m_ofset.x * x, topLeft.y - m_ofset.y / 2 - m_ofset.y * y);
+        }
+
 
         /// <summary>
         /// задать новые размеры, создает новый массив
@@ -78,7 +104,6 @@ namespace Maze
             if(reGenerateMaze)
                 Generate();
         }
-
 
         /// <summary>
         /// генерация лабиринта
@@ -147,7 +172,6 @@ namespace Maze
             return new KeyValuePair<MazePointListType, MazePointListType>(wall, space);
         }
 
-
         /// <summary>
         /// вывод лаберинта
         /// </summary>
@@ -174,10 +198,7 @@ namespace Maze
             */
 
 
-            MazeSpriteShiteAdapter mssa = PrefabWall.GetComponent<MazeSpriteShiteAdapter>();
-            Vector2 m_ofset = new Vector2(mssa.SizePerUnit, mssa.SizePerUnit);
-
-            Vector2 topLeft = new Vector2(-mssa.SizePerUnit * xCount / 2, mssa.SizePerUnit * yCount / 2);
+            CalculateScreenParametr(xCount, yCount);
 
             for(int i = 0; i < xCount; i++)
             {
@@ -185,7 +206,7 @@ namespace Maze
                 {
                     if(mMaze[i, j] == 0)
                         continue;
-                    GameObject obj = Instantiate(PrefabWall, new Vector2(topLeft.x + m_ofset.x / 2 + m_ofset.x * i, topLeft.y - m_ofset.y / 2 - m_ofset.y * j), Quaternion.identity) as GameObject;
+                    GameObject obj = Instantiate(PrefabWall, ConvertMazeCoordToScreen(i, j), Quaternion.identity) as GameObject;
                     obj.name = string.Format("wool_{0}_{1}", i, j);
 
                     MazeSpriteShiteAdapter a = obj.GetComponent<MazeSpriteShiteAdapter>();
@@ -196,21 +217,72 @@ namespace Maze
 
         #endregion
 
+        // разместить героя
+        void PositPlaer()
+        {
+            GameObject hero = GameObject.FindGameObjectWithTag("Player");
+            Vector2 vec = ConvertMazeCoordToScreen(ListSpace[ListSpace.Count - 1].x, ListSpace[ListSpace.Count - 1].y);
+            ListSpace.RemoveAt(ListSpace.Count - 1);
+            hero.transform.position = new Vector3(vec.x, vec.y, hero.transform.position.z);
+        }
+
+        public GameObject PrefabPrize;
+        public int CountPrize = 10;
+
+        //разместить призы
+        void PositPrize()
+        {
+            if(PrefabPrize != null)
+            {
+                for(int i = 0; i < CountPrize; i++)
+                {
+                    if(ListSpace.Count < 1)
+                        break;
+                    int index = UnityEngine.Random.Range(0, ListSpace.Count);
+                    Vector2 posPriz = ConvertMazeCoordToScreen(ListSpace[index].x, ListSpace[index].y);
+                    GameObject obj = Instantiate(PrefabPrize, posPriz, Quaternion.identity) as GameObject;
+                    obj.name = string.Format("Priz_{0}", i);
+                    ListSpace.RemoveAt(index);
+                }
+            }
+        }
+
+        public void ClearMaze()
+        {
+            GameObject[] wall = GameObject.FindGameObjectsWithTag("Wall");
+            foreach( GameObject w in wall )
+                Destroy(w);
+
+            GameObject[] prize = GameObject.FindGameObjectsWithTag("Prize");
+            foreach( GameObject p in prize )
+                Destroy(p);
+        }
+
+
+
+
+        public void ReStart()
+        {
+            ClearMaze();
+            Generate();
+            Draw();
+            PositPlaer();
+            PositPrize();
+        }
+
 
         #region стандартные калбэки юнити
 
         // Use this for initialization
         void Start()
         {
-
-            SetNewSize(30, 20);
-            SetNewGenerator(new ForTestDraw());
-            Generate();
-            Draw();
-
-
-
+            SetNewSize(xMazeSize, yMazeSize);
+            SetNewGenerator(new GrowingTreeMezeGen(WindingPrecent));
+            ReStart();
         }
+
+
+
         // Update is called once per frame
         void Update()
         {
