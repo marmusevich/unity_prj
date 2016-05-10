@@ -63,7 +63,6 @@ namespace Menu
         public  static List<MenuOneItem> GetMenuItems()
         {
             List<MenuOneItem> tmp = new List<MenuOneItem>();
-            tmp.Add(new MenuOneItem("Maze", "maze"));
             tmp.Add(new MenuOneItem("Lode runner", "lode_runner"));
             tmp.Add(new MenuOneItem("Habr: Character", "habr_test_1"));
             tmp.Add(new MenuOneItem("Habr: Platformer", "habr_test_2"));
