@@ -58,13 +58,6 @@
      <Compile Include="Assets\Scenes\lode_runner_res\scripts\GamePauseMenu.cs" />
      <Compile Include="Assets\Scenes\lode_runner_res\scripts\LevelMenedger.cs" />
      <Compile Include="Assets\Scenes\lode_runner_res\scripts\PlayerScript.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\GrowingTreeMezeGen.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\MazeCamera2DFollow.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\MazeController.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\MazeGeneratorBase.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\MazeHeroController.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\MazeSpriteShiteAdapter.cs" />
-     <Compile Include="Assets\Scenes\maze_res\scripts\RecursiveBacktrackingMazeGen.cs" />
      <Compile Include="Assets\Scenes\menu_res\CircledMove.cs" />
      <Compile Include="Assets\Scenes\menu_res\MainMenuBehaviour.cs" />
      <Compile Include="Assets\Scenes\menu_res\MenuInfo.cs" />

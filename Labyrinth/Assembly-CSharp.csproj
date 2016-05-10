@@ -3,8 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{CBEE44B2-AC02-2D81-086E-310C52B2BE1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -33,31 +34,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\GrowingTreeMezeGen.cs" />
-    <Compile Include="Assets\scripts\IntVector2D.cs" />
-    <Compile Include="Assets\scripts\MazeCamera2DFollow.cs" />
-    <Compile Include="Assets\scripts\MazeController.cs" />
-    <Compile Include="Assets\scripts\MazeGeneratorBase.cs" />
-    <Compile Include="Assets\scripts\MazeHeroController.cs" />
-    <Compile Include="Assets\scripts\MazeSpriteShiteAdapter.cs" />
-    <Compile Include="Assets\scripts\MyUtilsFunction.cs" />
-    <Compile Include="Assets\scripts\RecursiveBacktrackingMazeGen.cs" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\scripts\GrowingTreeMezeGen.cs" />
+     <Compile Include="Assets\scripts\IntVector2D.cs" />
+     <Compile Include="Assets\scripts\MazeCamera2DFollow.cs" />
+     <Compile Include="Assets\scripts\MazeController.cs" />
+     <Compile Include="Assets\scripts\MazeGeneratorBase.cs" />
+     <Compile Include="Assets\scripts\MazeHeroController.cs" />
+     <Compile Include="Assets\scripts\MazeSpriteShiteAdapter.cs" />
+     <Compile Include="Assets\scripts\MyUtilsFunction.cs" />
+     <Compile Include="Assets\scripts\NewBehaviourScript.cs" />
+     <Compile Include="Assets\scripts\RecursiveBacktrackingMazeGen.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -67,4 +70,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
