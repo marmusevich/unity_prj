@@ -55,6 +55,10 @@ public class GameControler : MonoBehaviour
 	//увеличить счет
 	public void AddScore()
 	{
+
+		Debug.Log( "AddScore()"  );
+
+
 		CurrentCountPrize++;
 
 		playerPoints += PrizeCost;
@@ -120,6 +124,9 @@ public class GameControler : MonoBehaviour
 
 		mFindPath.GetPath( startPos, finishPos );
 	}
+	// после поиска пути запус сопрограммы перемещения
+
+
 
 
 	#endregion

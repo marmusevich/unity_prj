@@ -43,6 +43,9 @@ public class MazeHeroController : MonoBehaviour
 	void OnTriggerEnter2D( Collider2D col )
 	{
 		if( col.gameObject.tag == "Prize" )
+		{
+			mGameControler.AddScore();
 			Destroy( col.gameObject );
+		}
 	}
 }
