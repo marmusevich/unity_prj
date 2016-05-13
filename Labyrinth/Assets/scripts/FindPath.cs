@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using MazePoint = IntVector2D;
 using MazePointListType = System.Collections.Generic.List<IntVector2D>;
+using MazeType = System.UInt16;
 
 
 public class FindPath
@@ -21,7 +22,7 @@ public class FindPath
 	#region функции
 
 	// задать исходный лабиринт
-	public void SetMaze( bool[,] imputMaze )
+	public void SetMaze( MazeType[,] imputMaze )
 	{
 		xMazeSize = ( uint )imputMaze.GetLength( 0 );
 		yMazeSize = ( uint )imputMaze.GetLength( 1 );
@@ -32,7 +33,7 @@ public class FindPath
 		{
 			for(int j = 0 ; j < yMazeSize ; j++)
 			{
-				if( !imputMaze[ i, j ] )
+				if( imputMaze[ i, j ] == 0 )
 					mMaze[ i, j ] = 0;
 				else
 					mMaze[ i, j ] = -1;
@@ -45,6 +46,26 @@ public class FindPath
 	{
 		//копия масива
 		int[,] tmpMaze = ( int[,] )mMaze.Clone();
+
+		int xCount = tmpMaze.GetLength( 0 );
+		int yCount = tmpMaze.GetLength( 1 );
+
+
+//		#region вывод строке
+//		string str = "";
+//		for(int i = 0 ; i < xCount ; i++)
+//		{
+//			for(int j = 0 ; j < yCount ; j++)
+//			{
+//				str += string.Format( "{0, 3}", tmpMaze[ i, j ] );
+//			}
+//			str += "\n";
+//		}
+//		Debug.Log( str );
+//		#endregion
+
+
+
 
 		//		Распространение волны
 		//     Пометить стартовую ячейку 0

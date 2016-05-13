@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\FindPath.cs" />
+     <Compile Include="Assets\scripts\GameControler.cs" />
      <Compile Include="Assets\scripts\GrowingTreeMezeGen.cs" />
      <Compile Include="Assets\scripts\IntVector2D.cs" />
      <Compile Include="Assets\scripts\MazeCamera2DFollow.cs" />

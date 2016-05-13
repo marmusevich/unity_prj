@@ -30,17 +30,6 @@ public class MazeController : MonoBehaviour
 	/// </summary>
 	public MazePointListType ListSpace;
 
-	/// <summary>
-	/// процент извилистости
-	/// </summary>
-	public float WindingPrecent = 0.5f;
-
-	/// <summary>
-	/// Размер лабиринта
-	/// </summary>
-	public uint xMazeSize = 20;
-	public uint yMazeSize = 20;
-
 	//для преобразователя координат
 	Vector2 m_ofset;
 	Vector2 topLeft;
@@ -192,21 +181,6 @@ public class MazeController : MonoBehaviour
 
 		int xCount = mMaze.GetLength( 0 );
 		int yCount = mMaze.GetLength( 1 );
-		/*
-            #region в строке
-            string str = "";
-            for(int i = 0; i < rowCount; i++)
-            {
-                for(int j = 0; j < colCount; j++)
-                {
-                    str += string.Format("{0, 3}", mMaze[i, j]);
-                }
-                str += "\n";
-            }
-            Debug.Log(str);
-            #endregion
-            */
-
 
 		CalculateScreenParametr( xCount, yCount );
 
@@ -225,58 +199,12 @@ public class MazeController : MonoBehaviour
 		}
 	}
 
+	public MazeType[,] GetMazeArr()
+	{
+		return mMaze;
+	}
+
 	#endregion
-
-	// разместить героя
-	void PositPlaer()
-	{
-		GameObject hero = GameObject.FindGameObjectWithTag( "Player" );
-		Vector2 vec = ConvertMazeCoordToScreen( ListSpace[ ListSpace.Count - 1 ].x, ListSpace[ ListSpace.Count - 1 ].y );
-		ListSpace.RemoveAt( ListSpace.Count - 1 );
-		hero.transform.position = new Vector3( vec.x, vec.y, hero.transform.position.z );
-	}
-
-	public GameObject PrefabPrize;
-	public int CountPrize = 10;
-
-	//разместить призы
-	void PositPrize()
-	{
-		if( PrefabPrize != null )
-		{
-			for(int i = 0 ; i < CountPrize ; i++)
-			{
-				if( ListSpace.Count < 1 )
-					break;
-				int index = UnityEngine.Random.Range( 0, ListSpace.Count );
-				Vector2 posPriz = ConvertMazeCoordToScreen( ListSpace[ index ].x, ListSpace[ index ].y );
-				GameObject obj = Instantiate( PrefabPrize, posPriz, Quaternion.identity ) as GameObject;
-				obj.name = string.Format( "Priz_{0}", i );
-				ListSpace.RemoveAt( index );
-			}
-		}
-	}
-
-	public void ClearMaze()
-	{
-		GameObject[] wall = GameObject.FindGameObjectsWithTag( "Wall" );
-
-		foreach( GameObject w in wall )
-			Destroy( w );
-
-		GameObject[] prize = GameObject.FindGameObjectsWithTag( "Prize" );
-		foreach( GameObject p in prize )
-			Destroy( p );
-	}
-
-	public void ReStart()
-	{
-		ClearMaze();
-		Generate();
-		Draw();
-		PositPlaer();
-		PositPrize();
-	}
 
 
 	#region стандартные калбэки юнити
@@ -284,10 +212,6 @@ public class MazeController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		SetNewSize( xMazeSize, yMazeSize );
-		SetNewGenerator( new GrowingTreeMezeGen( WindingPrecent ) );
-
-		ReStart();
 	}
 
 
