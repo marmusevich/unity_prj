@@ -114,7 +114,7 @@ public class IntVector2D
 
 	public static bool operator !=( IntVector2D  a, IntVector2D b )
 	{
-		return a.x != b.x && a.y != b.y;
+		return !(a.x == b.x && a.y == b.y);
 	}
 
 	public override string ToString()

@@ -38,6 +38,8 @@ public class GameControler : MonoBehaviour
 	//алгоритм поиска пути
 	private FindPath mFindPath = null;
 
+	private GameObject mHero;
+
 	#endregion
 
 	#region функции
@@ -85,10 +87,9 @@ public class GameControler : MonoBehaviour
 	// разместить героя
 	void PositPlaer()
 	{
-		GameObject hero = GameObject.FindGameObjectWithTag( "Player" );
 		Vector2 vec = mMazeController.ConvertMazeCoordToScreen( mMazeController.ListSpace[ mMazeController.ListSpace.Count - 1 ].x, mMazeController.ListSpace[ mMazeController.ListSpace.Count - 1 ].y );
 		mMazeController.ListSpace.RemoveAt( mMazeController.ListSpace.Count - 1 );
-		hero.transform.position = new Vector3( vec.x, vec.y, hero.transform.position.z );
+		mHero.transform.position = new Vector3( vec.x, vec.y, mHero.transform.position.z );
 	}
 
 
@@ -115,27 +116,52 @@ public class GameControler : MonoBehaviour
 	{
 		MazePoint finishPos = mMazeController.ConvertScreenCoordToMaze( finishPosInWorldPoint );
 
-		GameObject hero = GameObject.FindGameObjectWithTag( "Player" );
-		Vector2 startPosInWorldPoint = new Vector2( hero.transform.position.x, hero.transform.position.y);
+		Vector2 startPosInWorldPoint = new Vector2( mHero.transform.position.x, mHero.transform.position.y);
 		MazePoint startPos = mMazeController.ConvertScreenCoordToMaze( startPosInWorldPoint );
 
 
 		Debug.Log( "startPos: " + startPos.ToString() +  ", finishPos: " + finishPos.ToString() );
 
-		mFindPath.GetPath( startPos, finishPos );
+
+		MazePointListType path = mFindPath.GetPath( startPos, finishPos );
+		if(path!=null)
+			StartCoroutine(MoveHeroOnPath(path));
 	}
+
 	// после поиска пути запус сопрограммы перемещения
-
-
-
-
 	#endregion
+
+	IEnumerator MoveHeroOnPath(MazePointListType path)
+	{
+		//Debug.Log( "path.Count: "+ path.Count.ToString() );
+
+		MazePoint pos;
+		for(int i =0; i<path.Count; i++)
+		{
+			pos = path[ i ];
+			Debug.Log("[ "+ i.ToString() + " ] -> "+   pos.ToString() );
+
+			Vector2 vec = mMazeController.ConvertMazeCoordToScreen( pos.x, pos.y );
+			mHero.transform.position = new Vector3( vec.x, vec.y, mHero.transform.position.z );	
+
+			yield return new WaitForSeconds( 0.2f );
+			//yield return new WaitForFixedUpdate();
+		}
+	}
+
+
+
+
+
+
 
 
 	#region стандартные калбэки юнити
 	// Use this for initialization
 	void Start () 
 	{
+		mHero = GameObject.FindGameObjectWithTag( "Player" );
+
 		mFindPath = new FindPath();
 		mMazeController = GetComponent<MazeController>();
 		mMazeController.SetNewSize( xMazeSize, yMazeSize );
