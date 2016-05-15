@@ -7,21 +7,14 @@ public class MazeHeroController : MonoBehaviour
 	public Transform CodeStore;
 	public float MaxSpeed = 10.0f;
 
-	private Rigidbody2D rigbody;
+	//private Rigidbody2D rigbody;
 	private GameControler mGameControler = null;
 
 	// Use this for initialization
 	void Start()
 	{
-		rigbody = GetComponent<Rigidbody2D>();
+		//rigbody = GetComponent<Rigidbody2D>();
 		mGameControler = CodeStore.GetComponent<GameControler>();
-	}
-
-	private void FixedUpdate()
-	{
-		float moveX = Input.GetAxis( "Horizontal" );
-		float moveY = Input.GetAxis( "Vertical" );
-		rigbody.velocity = new Vector2( moveX * MaxSpeed, moveY * MaxSpeed );
 	}
 
 

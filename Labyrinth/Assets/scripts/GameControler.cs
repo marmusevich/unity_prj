@@ -7,9 +7,10 @@ using MazePointListType = System.Collections.Generic.List<IntVector2D>;
 using MazeType = System.UInt16;
 
 
-public class GameControler : MonoBehaviour 
+public class GameControler : MonoBehaviour
 {
 	#region переменные
+
 	/// <summary>
 	/// Размер лабиринта
 	/// </summary>
@@ -40,12 +41,19 @@ public class GameControler : MonoBehaviour
 
 	private GameObject mHero;
 
+
+	private bool isMoving = false;
+
+	IEnumerator mMoveHeroOnPathCoroutine = null;
+
 	#endregion
 
 	#region функции
+
 	//перезапуск уровня
 	public void ReStart()
 	{
+		StopMoveInPath();
 		ClearMaze();
 		mMazeController.Generate();
 		mMazeController.Draw();
@@ -57,10 +65,6 @@ public class GameControler : MonoBehaviour
 	//увеличить счет
 	public void AddScore()
 	{
-
-		Debug.Log( "AddScore()"  );
-
-
 		CurrentCountPrize++;
 
 		playerPoints += PrizeCost;
@@ -112,34 +116,50 @@ public class GameControler : MonoBehaviour
 	}
 
 
-	void StartFindPath(Vector2 finishPosInWorldPoint)
+	void StartFindPath( Vector2 finishPosInWorldPoint )
 	{
 		MazePoint finishPos = mMazeController.ConvertScreenCoordToMaze( finishPosInWorldPoint );
 
-		Vector2 startPosInWorldPoint = new Vector2( mHero.transform.position.x, mHero.transform.position.y);
+		Vector2 startPosInWorldPoint = new Vector2( mHero.transform.position.x, mHero.transform.position.y );
 		MazePoint startPos = mMazeController.ConvertScreenCoordToMaze( startPosInWorldPoint );
 
+		//Debug.Log( "startPos: " + startPos.ToString() +  ", finishPos: " + finishPos.ToString() );
 
-		Debug.Log( "startPos: " + startPos.ToString() +  ", finishPos: " + finishPos.ToString() );
-
-
-		MazePointListType path = mFindPath.GetPath( startPos, finishPos );
-		if(path!=null)
-			StartCoroutine(MoveHeroOnPath(path));
+		// после поиска пути запус сопрограммы перемещения
+		StartMoveInPath( mFindPath.GetPath( startPos, finishPos ) );
 	}
 
 	// после поиска пути запус сопрограммы перемещения
-	#endregion
+	void  StartMoveInPath( MazePointListType path )
+	{
+		if( path != null )
+		{
+			mMoveHeroOnPathCoroutine = MoveHeroOnPath( path );
+			StartCoroutine( mMoveHeroOnPathCoroutine );
+		}
 
-	IEnumerator MoveHeroOnPath(MazePointListType path)
+	}
+
+	void StopMoveInPath()
+	{
+		isMoving = false;
+		if( mMoveHeroOnPathCoroutine != null )
+			StopCoroutine( mMoveHeroOnPathCoroutine );
+		mMoveHeroOnPathCoroutine = null;
+
+	}
+
+	IEnumerator MoveHeroOnPath( MazePointListType path )
 	{
 		//Debug.Log( "path.Count: "+ path.Count.ToString() );
 
+		isMoving = true;
+
 		MazePoint pos;
-		for(int i =0; i<path.Count; i++)
+		for(int i = 0 ; i < path.Count ; i++)
 		{
 			pos = path[ i ];
-			Debug.Log("[ "+ i.ToString() + " ] -> "+   pos.ToString() );
+			//Debug.Log("[ "+ i.ToString() + " ] -> "+   pos.ToString() );
 
 			Vector2 vec = mMazeController.ConvertMazeCoordToScreen( pos.x, pos.y );
 			mHero.transform.position = new Vector3( vec.x, vec.y, mHero.transform.position.z );	
@@ -147,18 +167,19 @@ public class GameControler : MonoBehaviour
 			yield return new WaitForSeconds( 0.2f );
 			//yield return new WaitForFixedUpdate();
 		}
+		isMoving = false;
 	}
 
 
-
-
+	#endregion
 
 
 
 
 	#region стандартные калбэки юнити
+
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		mHero = GameObject.FindGameObjectWithTag( "Player" );
 
@@ -171,20 +192,63 @@ public class GameControler : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
-		if( Input.GetKeyDown( KeyCode.Space ) )
+		
+	}
+
+
+	private void FixedUpdate()
+	{
+		// первый вариант, не двигать пока идем по пути
+		if( !isMoving )
 		{
-			ReStart();
+			float moveX = Input.GetAxis( "Horizontal" );
+			float moveY = Input.GetAxis( "Vertical" );
+
+			if( moveX != 0 || moveY != 0 )
+			{
+				Debug.Log( "moveX: " + moveX.ToString() + ", moveY: " + moveY.ToString() );
+
+
+				Rigidbody2D rigbody = mHero.GetComponent<Rigidbody2D>();
+				MazeHeroController mhc = mHero.GetComponent<MazeHeroController>();
+
+				rigbody.velocity = new Vector2( moveX * mhc.MaxSpeed, moveY * mhc.MaxSpeed );
+			}
+
+
+			if( Input.GetKeyDown( KeyCode.Space ) )
+			{
+				ReStart();
+			}
+
+			//отработка клика мыши
+			if( Input.GetMouseButtonDown( 0 ) )
+			{
+				Vector3 v3 = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+				StartFindPath( new Vector2( v3.x, v3.y ) );
+			}
 		}
 
-		//отработка клика мыши
-		if( Input.GetMouseButtonDown( 0 ) )
+		//вариант два останавливать движение и перезапускать
 		{
-			Vector3 v3 = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-			StartFindPath( new Vector2( v3.x, v3.y ));
+//			if( Input.GetKeyDown( KeyCode.Space ) )
+//			{
+//				ReStart();
+//			}
+//
+//			//отработка клика мыши
+//			if( Input.GetMouseButtonDown( 0 ) )
+//			{
+//				StopMoveInPath();
+//				Vector3 v3 = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+//				StartFindPath( new Vector2( v3.x, v3.y ) );
+//			}			
 		}
+
 	}
+
 
 
 	void OnGUI()

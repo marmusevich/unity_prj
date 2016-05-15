@@ -68,22 +68,22 @@ public class FindPath
 		if( GetVal( ref mMaze, finishPos ) != 0 )
 			return null;
 
-		#region вывод строке
-		{
-			string str = "";
-			for(int i = 0 ; i < xCount ; i++)
-			{
-				for(int j = 0 ; j < yCount ; j++)
-				{
-					str += string.Format( "{0, 3}\t", GetVal( ref mMaze, new MazePoint(i,j)) );
-					//str += string.Format( "{0, 3}\t", tmpMaze[ i, j ] );
-
-				}
-				str += "\n";
-			}
-			Debug.Log( str );
-		}		
-		#endregion
+//		#region вывод строке
+//		{
+//			string str = "";
+//			for(int i = 0 ; i < xCount ; i++)
+//			{
+//				for(int j = 0 ; j < yCount ; j++)
+//				{
+//					str += string.Format( "{0, 3}\t", GetVal( ref mMaze, new MazePoint(i,j)) );
+//					//str += string.Format( "{0, 3}\t", tmpMaze[ i, j ] );
+//
+//				}
+//				str += "\n";
+//			}
+//			Debug.Log( str );
+//		}		
+//		#endregion
 
 
 		//копия масива
@@ -214,7 +214,7 @@ public class FindPath
 		//		ИНАЧЕ
 		//		ВОЗВРАТ путь не найден
 
-		Debug.Log( "cells.Count: "+ cells.Count.ToString() );
+		//Debug.Log( "cells.Count: "+ cells.Count.ToString() );
 
 		MazePointListType path = new MazePointListType();
 		while( cells.Count > 0 )
