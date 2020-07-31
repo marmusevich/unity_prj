@@ -96,7 +96,7 @@ namespace Menu
                 MenuInfo.MenuOneItem tmp = moi;
                 btn.onClick.AddListener(() => OnButtonClick_btnSceneSelect(tmp));
 
-                GameObject btnText = btn.transform.FindChild("Text").gameObject;
+                GameObject btnText = btn.transform.Find("Text").gameObject;
                 if(btnText != null)
                     btnText.GetComponent<Text>().text = moi.Caption;
 
