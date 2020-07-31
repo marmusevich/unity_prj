@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 using MazePoint = IntVector2D;
 using MazePointListType = System.Collections.Generic.List<IntVector2D>;
@@ -29,6 +30,10 @@ public class GameControler : MonoBehaviour
 	public int CurrentCountPrize = 0;
 
 	public GameObject PrefabPrize;
+
+
+	public Text txtLife;
+	public Text txtScore;
 
 
 	private int playerLives = 3;
@@ -170,9 +175,14 @@ public class GameControler : MonoBehaviour
 		isMoving = false;
 	}
 
-
 	#endregion
 
+
+	public void PauseMenuPresed()
+	{
+		Debug.Log( "mainmenu" );
+		SceneManager.LoadScene( "mainmenu" );
+	}
 
 
 
@@ -200,9 +210,18 @@ public class GameControler : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if( txtLife != null )
+			txtLife.text = playerLives.ToString();
+
+		if( txtScore != null )
+			txtScore.text = playerPoints.ToString();
+
+
+
 		// первый вариант, не двигать пока идем по пути
 		if( !isMoving )
 		{
+
 			float moveX = Input.GetAxis( "Horizontal" );
 			float moveY = Input.GetAxis( "Vertical" );
 
@@ -253,7 +272,7 @@ public class GameControler : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.Label( new Rect( 5.0f, 3.0f, 200.0f, 200.0f ), "Live's: " + playerLives + " Score: " + playerPoints );
+//		GUI.Label( new Rect( 5.0f, 3.0f, 200.0f, 200.0f ), "Live's: " + playerLives + " Score: " + playerPoints );
 	}
 
 	#endregion

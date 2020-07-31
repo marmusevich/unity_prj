@@ -5,6 +5,7 @@ public class MazeHeroController : MonoBehaviour
 {
 	public Transform CameraTransform;
 	public Transform CodeStore;
+	public Transform BG;
 	public float MaxSpeed = 10.0f;
 
 	//private Rigidbody2D rigbody;
@@ -23,6 +24,8 @@ public class MazeHeroController : MonoBehaviour
 	{
 		Vector3 NewCameraPos = new Vector3( transform.position.x, transform.position.y, CameraTransform.position.z );
 		CameraTransform.position = NewCameraPos;
+
+		BG.position = new Vector3( transform.position.x / 2, transform.position.y / 2, BG.position.z );
 
 
 	}
